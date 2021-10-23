@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Marmelad&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  outline: none;
+  font-family: "Marmelad", sans-serif, -apple-system, system-ui, sans-serif;
+  font-size: 17px;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osz-font-smoothing: grayscale;
+}
+
+.todo {
+  // Меню
+  &__sidebar {
+    width: 230px;
+    height: 100vh;
+    background-color: #f4f6f8;
+    padding: 60px 0 0 30px;
+  }
+  //Элемент меню
+  &__list {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 90%;
+    height: 37px;
+    transition: all 0.2s;
+    &.active {
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      background-color: #fff;
+      border-radius: 4px;
+    }
+    &:hover {
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      background-color: #fff;
+      border-radius: 4px;
+    }
+    svg {
+      padding: 0 10px;
+    }
+  }
+
+  //Задачи
+  &__tasks {
+    margin-top: 30px;
+
+    // Задача
+    &-task {
+      display: flex;
+      width: 90%;
+      height: 37px;
+      align-items: center;
+      transition: all 0.2s;
+      margin-bottom: 10px;
+      &.active {
+        background-color: rgb(255, 255, 255);
+        cursor: pointer;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+        border-radius: 10px;
+        background-color: #fff;
+        border-radius: 4px;
+      }
+      &:hover {
+        background-color: rgb(255, 255, 255);
+        cursor: pointer;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+        border-radius: 10px;
+        background-color: #fff;
+        border-radius: 4px;
+      }
+    }
+    .circle {
+      width: 10px;
+      height: 10px;
+      padding: 0 10px 0 14px;
+    }
+  }
+}
