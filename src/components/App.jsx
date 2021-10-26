@@ -1,7 +1,6 @@
 import React from 'react';
 import Folders from "./Folders.jsx"
-import AddFolderMenu from './AddFolderMenu.jsx';
-import { AiFillFolderAdd } from 'react-icons/ai';
+import AddFolderForm from './AddFolderForm.jsx';
 import { ImHome } from "react-icons/im";
 import './App.scss';
 
@@ -35,7 +34,8 @@ function App() {
       }]
     }
   ];
-  // console.log(folders)
+
+
 
 
   return (
@@ -51,13 +51,11 @@ function App() {
 
         <Folders folders={folders} />
 
-        <div className="nav__addFolder">
-          <AiFillFolderAdd className="nav__addFolder-icon" />
-          <p className="nav__addFolder-text">Add forlder</p>
-        </div>
+        <AddFolderForm />
+
       </div>
 
-      <AddFolderMenu />
+
     </nav>
   );
 }

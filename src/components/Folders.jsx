@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
-import {HiOutlineFolderRemove} from "react-icons/hi";
+import { HiOutlineFolderRemove } from "react-icons/hi";
+import { VscCircleLargeFilled } from "react-icons/vsc"
 
 function Folders({ folders }) {
   const [state] = useState(true)
@@ -9,11 +10,9 @@ function Folders({ folders }) {
 
       {folders.map((folder, index) => (
         <li className={classNames("nav__folders-folder", { "active": state })} key={index} >
-          <svg className="nav__folders-circle">
-            <circle cx="5" cy="5" r="5px" fill={folder.color} />
-          </svg>
+          <VscCircleLargeFilled className="nav__folders-circle" color={folder.color} />
           <p>{folder.name}</p>
-          <HiOutlineFolderRemove className="nav__folders-folderRemove"/>
+          <HiOutlineFolderRemove className="nav__folders-folderRemove" />
         </li>
       ))
       }
