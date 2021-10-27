@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { VscCircleLargeFilled } from "react-icons/vsc"
 import { IoIosClose } from "react-icons/io"
 import { AiFillFolderAdd } from 'react-icons/ai';
+import classNames from 'classnames';
 import "./AddFolderForm.scss"
 
 
@@ -18,26 +19,21 @@ function AddFolderForm() {
   ]
 
   const [visableForm, setVisableForm] = useState(false)
+  const [selectedColor, setSelectedColor] = useState(null)
 
   return (
     <div>
-
       <div className="nav__addFolder" onClick={() => setVisableForm(true)}>
         <AiFillFolderAdd className="nav__addFolder-icon" />
         <p className="nav__addFolder-text">Add forlder</p>
       </div>
 
-      {visableForm &&
+      {visableForm && (
         <div className="addFolderForm" >
           <IoIosClose className="addFolderForm-close" onClick={() => setVisableForm(false)} />
-          <input
-            className="addFolderForm-input"
-            type="text"
-            name=""
-            id=""
-            placeholder="Folder name..."
+          <input className="addFolderForm-input" type="text" placeholder="Folder name..." style={{ color: selectedColor }}
           />
-          <button className="addFolderForm-btn">Add</button>
+          <button className="addFolderForm-btn" style={{ color: selectedColor }}>Add</button>
 
 
           <div className="addFolderForm__colors">
@@ -45,14 +41,16 @@ function AddFolderForm() {
               return (
                 <ul className="addFolderForm__colors-ul" key={style}>{style.map((color, index) => {
                   return (
-                    <VscCircleLargeFilled className="addFolderForm__colors-ul__color" color={color} key={index} />
+                    <VscCircleLargeFilled className={classNames('addFolderForm__colors-ul__color', { 'active': color === selectedColor })} color={color} key={index} onClick={() => { setSelectedColor(color) }} />
                   )
                 })}</ul>
               )
             })}
           </div>
-        </div>}
-    </div>
+        </div>
+      )
+      }
+    </div >
   )
 }
 
