@@ -3,24 +3,20 @@
   // Сайдбар
   &__sidebar {
     position: absolute;
+    display: flex;
     bottom: 0;
-    left: -10px;
     background-color: rgb(245, 245, 245);
     border-top-right-radius: 20px;
     margin: auto;
-    width: 220px;
-    padding: 20px 0 30px 20px;
+    width: auto;
+    padding: 10px 20px;
     user-select: none;
   }
   &__menu {
     // Элемент меню
-
-    &-name {
-      font-size: 20px;
-    }
     &-list {
-      width: 90%;
-      height: 37px;
+      width: 50px;
+      height: 50px;
       display: flex;
       align-items: center;
       cursor: pointer;
@@ -44,33 +40,37 @@
     }
 
     svg {
+      width: 30px;
+      height: 30px;
       font-size: 17px;
-      padding: 0 10px 0 13px;
+      padding: 0 10px;
+      color: rgb(66, 66, 66);
     }
   }
 
   //Папки
   &__folders {
-    margin-top: 20px;
+    display: flex;
+    margin: 0 20px;
 
     // Папка
     &-folder {
       display: flex;
-      width: 90%;
-      height: 37px;
+      width: 50px;
+      height: 50px;
       align-items: center;
       transition: all 0.2s ease;
-      margin-bottom: 10px;
       position: relative;
+
       &.active {
         cursor: pointer;
         box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
         border-radius: 10px;
         background-color: #fff;
         border-radius: 4px;
-        // .nav__folders-folderRemove {
-        //   display: block;
-        // }
+        .folderInfo {
+          display: flex;
+        }
       }
       &:hover {
         cursor: pointer;
@@ -78,101 +78,82 @@
         border-radius: 10px;
         background-color: #fff;
         border-radius: 4px;
-        .nav__folders-folderRemove {
-          display: block;
+        .folderInfo {
+          filter: opacity(1);
         }
       }
       &:active {
         background-color: rgb(240, 240, 240);
-        .nav__folders-folderRemove {
-          display: block;
-        }
       }
-      &Remove {
-        width: 15px;
-        display: none;
+      .folderInfo {
+        display: flex;
+        left: 0px;
+        top: -60px;
+        width: auto;
+        height: auto;
+        padding: 10px 10px;
         position: absolute;
-        right: 15px;
         transition: all 0.2s ease;
-        color: rgb(179, 179, 179);
-        &:hover {
-          color: rgb(233, 146, 120);
+        color: rgb(80, 80, 80);
+        background-color: rgb(238, 238, 238);
+        border-radius: 10px;
+        justify-content: space-between;
+        transition: all 0.3s ease;
+        filter: opacity(0);
+        &-text {
+          white-space: nowrap;
         }
-        &:active {
-          color: rgb(255, 255, 255);
+        .removeFolder {
+          padding: 4px 0 0 10px;
+          margin: 0 auto;
+          &:hover {
+            color: rgb(233, 146, 120);
+          }
+          &:active {
+            color: rgb(255, 255, 255);
+          }
         }
       }
     }
     &-folderIcon {
-      width: 15px;
-      height: 15px;
+      width: 20px;
+      height: 20px;
       padding: 0 10px 0 14px;
     }
   }
   // Добавить папку
   &__addFolder {
-    margin-left: 13px;
-    margin-top: 28px;
     display: flex;
-    width: 80%;
+    padding-top: 10px;
+    svg {
+      width: 30px;
+      height: 30px;
+      color: rgb(224, 224, 224);
+    }
     &:hover {
-      .nav__addFolder-text,
       .nav__addFolder-icon {
-        color: rgb(77, 77, 77);
+        color: rgb(51, 51, 51);
         cursor: pointer;
       }
     }
     &:active {
-      .nav__addFolder-text,
       .nav__addFolder-icon {
         color: rgb(177, 177, 177);
         cursor: pointer;
       }
     }
-    &-text,
     &-icon {
       font-size: 19px;
       color: rgb(202, 201, 201);
       transition: all 0.2s ease;
       height: 20px;
-    }
-    &-icon {
       font-size: 17px;
-      padding-right: 10px;
     }
   }
 }
 
-@media (max-width: 590px) {
-  .folder {
-    padding: 3vw;
-  }
-}
-
-@media (max-width: 10000px) {
-  .nav__addFolder-text {
-    display: none;
-  }
-  .nav__menu-name {
-    display: none;
-  }
-  .nav__folders-name {
-    display: none;
-  }
-  .nav__folders-folder {
-    width: 40px;
-    &:hover {
-      width: 70px;
-    }
-  }
-  .nav__menu-list {
-    width: 45px;
-  }
-  .nav__sidebar {
-    width: 60px;
-  }
-  .addFolderForm {
-    top: 30px;
-    left: 100px;
-  }
-}
+// @media (max-width: 590px) {
+//   .folder {
+//     padding: 3vw;
+//   }
+// }

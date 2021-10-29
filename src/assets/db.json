@@ -1,47 +1,5 @@
 {
   "folders":[
-    {
-      "id":"0",
-      "name": "Notebook",
-      "color": "#2a4a8b",
-      "tasks": [
-      {
-        "name": "Work",
-        "discription": "Do React App!"
-      },
-      {
-        "name": "Work",
-        "discription": "Do React App!"
-      },
-      {
-        "name": "Work",
-        "discription": "Do React App!"
-      },
-      {
-        "name": "Work",
-        "discription": "Do React App!"
-      },
-      {
-        "name": "Work",
-        "discription": "Do React App! Do Do Do React App! Do React App!Do React App! React App! Do React App! Do React App!React App!  Do React App! Do React App!"
-      },
-      {
-        "name": "Musik",
-        "discription": "Listen beautiful music!"
-      }]
-    },
-    {
-      "id":"1",
-      "name": "Homework",
-      "color": "#79ad9f",
-      "tasks": [{
-        "name": "Movies",
-        "discription": "Watch more movies!"
-      },
-      {
-        "name": "Books",
-        "discription": "Read more books!"
-      }]
-    }
+    
   ]
 }

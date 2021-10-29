@@ -7,6 +7,7 @@ import { AiFillFolderOpen } from "react-icons/ai"
 
 function Folders({ folders }) {
   const [selectedFolder, setSelectedFolder] = useState(null)
+
   return (
     <ul className="nav__folders">
 
@@ -16,8 +17,10 @@ function Folders({ folders }) {
         }} >
           {!(selectedFolder === index) && <AiFillFolder className="nav__folders-folderIcon" color={folder.color} />}
           {(selectedFolder === index) && <AiFillFolderOpen className="nav__folders-folderIcon" color={folder.color} />}
-          <p className="nav__folders-name" style={{ color: folder.color }}>{folder.name}</p>
-          <HiOutlineFolderRemove className="nav__folders-folderRemove" />
+          <div className="folderInfo" >
+            <p className="folderInfo-text">{folder.name}</p>
+            <HiOutlineFolderRemove className="removeFolder" />
+          </div>
         </li>
       ))
       }

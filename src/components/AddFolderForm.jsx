@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import "./AddFolderForm.scss"
 
 
-function AddFolderForm() {
+function AddFolderForm({ newFolder }) {
 
   const colors = [
     ['#dbdad6', '#beab9e', '#b3814e', '#723505', '#202020'],
@@ -19,21 +19,48 @@ function AddFolderForm() {
   ]
 
   const [visableForm, setVisableForm] = useState(false)
-  const [selectedColor, setSelectedColor] = useState(null)
+  const [selectedColor, setSelectedColor] = useState('#feab6b')
+  const [inputValue, setInputValue] = useState('')
+
+  const createFolder = () => {
+    if (!inputValue) {
+      alert('Enter folder name...')
+      return;
+    }
+
+    newFolder({
+      "id": null,
+      "name": inputValue,
+      "color": selectedColor,
+      "tasks": []
+    })
+    setInputValue('')
+  }
 
   return (
     <div>
       <div className="nav__addFolder" onClick={() => setVisableForm(true)}>
         <AiFillFolderAdd className="nav__addFolder-icon" />
-        <p className="nav__addFolder-text">Add forlder</p>
       </div>
 
       {visableForm && (
         <div className="addFolderForm" >
           <IoIosClose className="addFolderForm-close" onClick={() => setVisableForm(false)} />
-          <input className="addFolderForm-input" type="text" placeholder="Folder name..." style={{ color: selectedColor }}
+
+          <input
+            value={inputValue}
+            className="addFolderForm-input"
+            type="text"
+            placeholder="Folder name..."
+            style={{ color: selectedColor }}
+            onChange={e => (setInputValue(e.target.value))}
+            onKeyPress={e => { e.key === 'Enter' && setInputValue('') }}
           />
-          <button className="addFolderForm-btn" style={{ color: selectedColor }}>Add</button>
+
+          <button
+            className="addFolderForm-btn"
+            onClick={createFolder}
+            style={{ color: selectedColor }}>Add</button>
 
 
           <div className="addFolderForm__colors">

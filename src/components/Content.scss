@@ -1,7 +1,7 @@
 $pad: 3vh;
 
 .foldersBox {
-  background-color: rgb(159, 173, 182);
+  background-color: rgb(97, 142, 170);
   width: 100vw;
   height: 100vh - 2 * $pad;
   padding: $pad $pad/2 $pad $pad/2;
@@ -30,7 +30,7 @@ $pad: 3vh;
     font-size: 3vw;
     padding-bottom: 5px;
     border-bottom: 2px solid rgb(230, 230, 230);
-    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.04);
   }
 }
 
