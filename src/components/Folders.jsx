@@ -5,24 +5,33 @@ import { AiFillFolder } from "react-icons/ai"
 import { AiFillFolderOpen } from "react-icons/ai"
 
 
-function Folders({ folders }) {
+function Folders({ folders, whenRemove, whenSelected }) {
   const [selectedFolder, setSelectedFolder] = useState(null)
+
+  const setActiveFolder = (index) => {
+    setSelectedFolder(index);
+    whenSelected(index)
+  }
+
 
   return (
     <ul className="nav__folders">
 
-      {folders.map((folder, index) => (
-        <li className={classNames("nav__folders-folder", { "active": selectedFolder === index })} key={index} onClick={() => {
-          setSelectedFolder(index)
-        }} >
-          {!(selectedFolder === index) && <AiFillFolder className="nav__folders-folderIcon" color={folder.color} />}
-          {(selectedFolder === index) && <AiFillFolderOpen className="nav__folders-folderIcon" color={folder.color} />}
-          <div className="folderInfo" >
-            <p className="folderInfo-text">{folder.name}</p>
-            <HiOutlineFolderRemove className="removeFolder" />
-          </div>
-        </li>
-      ))
+      {folders &&
+        folders.map((folder, index) => (
+          folder.name && //Если существует имя папки, произойдет рендер
+          <li className={classNames("nav__folders-folder", { "active": selectedFolder === index })} key={index} onClick={() => setActiveFolder(index)} >
+            {!(selectedFolder === index) && <AiFillFolder className="nav__folders-folderIcon" color={folder.color} />}
+            {(selectedFolder === index) && <AiFillFolderOpen className="nav__folders-folderIcon" color={folder.color} />}
+            <div className="folderInfo" >
+              <p className="folderInfo-text">{folder.name}</p>
+              <HiOutlineFolderRemove
+                className="removeFolder"
+                onClick={() => whenRemove(index)}
+              />
+            </div>
+          </li>
+        ))
       }
 
     </ul >
@@ -30,3 +39,5 @@ function Folders({ folders }) {
 }
 
 export default Folders
+
+

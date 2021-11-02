@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
-import { VscCircleLargeFilled } from "react-icons/vsc"
-import { IoIosClose } from "react-icons/io"
-import { AiFillFolderAdd } from 'react-icons/ai';
+import React, { useState } from 'react';
 import classNames from 'classnames';
-import "./AddFolderForm.scss"
+
+import { VscCircleLargeFilled } from "react-icons/vsc";
+import { IoIosClose } from "react-icons/io";
+import { AiFillFolderAdd } from 'react-icons/ai';
+
+import "./AddFolderForm.scss";
 
 
-function AddFolderForm({ newFolder }) {
+function AddFolderForm({ addNewFolder }) {
 
   const colors = [
     ['#dbdad6', '#beab9e', '#b3814e', '#723505', '#202020'],
@@ -27,8 +29,7 @@ function AddFolderForm({ newFolder }) {
       alert('Enter folder name...')
       return;
     }
-
-    newFolder({
+    addNewFolder({
       "id": null,
       "name": inputValue,
       "color": selectedColor,

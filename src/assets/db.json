@@ -1,5 +1,22 @@
 {
-  "folders":[
-    
+  "folders": [
+    {
+      "id": 2,
+      "name": "412",
+      "color": "#171e13",
+      "tasks": []
+    },
+    {
+      "id": 4,
+      "name": "123",
+      "color": "#feab6b",
+      "tasks": []
+    },
+    {
+      "id": 5,
+      "name": "123",
+      "color": "#feab6b",
+      "tasks": []
+    }
   ]
 }
