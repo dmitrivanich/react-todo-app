@@ -1,20 +1,20 @@
 {
   "folders": [
     {
+      "id": 1,
+      "name": "12",
+      "color": "#e76f3d",
+      "tasks": []
+    },
+    {
       "id": 2,
-      "name": "412",
-      "color": "#171e13",
+      "name": "23",
+      "color": "#2a4a8b",
       "tasks": []
     },
     {
-      "id": 4,
-      "name": "123",
-      "color": "#feab6b",
-      "tasks": []
-    },
-    {
-      "id": 5,
-      "name": "123",
+      "id": 3,
+      "name": "34",
       "color": "#feab6b",
       "tasks": []
     }

@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Folders from "./Folders.jsx"
 import AddFolderForm from './AddFolderForm.jsx';
 import { ImHome } from "react-icons/im";
-import classNames from 'classnames';
 import './Sidebar.scss';
 
 function Sidebar({ addNewFolder, folders, whenRemove, whenSelected, whenMenuActive }) {
-  const [active, setActive] = useState(false)
 
   const menu = () => {
-    setActive(!active)
     whenMenuActive()
   }
 
@@ -19,7 +16,7 @@ function Sidebar({ addNewFolder, folders, whenRemove, whenSelected, whenMenuActi
       <div className="nav__sidebar">
 
         <ul className="nav__menu">
-          <li className={classNames('nav__menu-list', { 'active': active })} onClick={() => menu()}>
+          <li className='nav__menu-list' onClick={() => menu()}>
             <ImHome size="1em" />
           </li>
         </ul>

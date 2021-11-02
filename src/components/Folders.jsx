@@ -8,6 +8,7 @@ import { AiFillFolderOpen } from "react-icons/ai"
 function Folders({ folders, whenRemove, whenSelected }) {
   const [selectedFolder, setSelectedFolder] = useState(null)
 
+
   const setActiveFolder = (index) => {
     setSelectedFolder(index);
     whenSelected(index)
@@ -19,7 +20,7 @@ function Folders({ folders, whenRemove, whenSelected }) {
 
       {folders &&
         folders.map((folder, index) => (
-          folder.name && //Если существует имя папки, произойдет рендер
+          folder.name && //Если сущeствует имя папки, произойдет рендер
           <li className={classNames("nav__folders-folder", { "active": selectedFolder === index })} key={index} onClick={() => setActiveFolder(index)} >
             {!(selectedFolder === index) && <AiFillFolder className="nav__folders-folderIcon" color={folder.color} />}
             {(selectedFolder === index) && <AiFillFolderOpen className="nav__folders-folderIcon" color={folder.color} />}
