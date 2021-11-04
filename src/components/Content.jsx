@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import AddTaskForm from './AddTaskForm';
 import './Content.scss'
 
-const Content = ({ folders, whenAddTask }) => {
+import axios from 'axios';
+import { IoIosClose } from 'react-icons/io';
+
+
+const Content = ({ folders, addTaskOnFolders, whenRemoveFolder }) => {
 
   const [title, setTitle] = useState(null) //Новое название папки
   const [selectedTitleIndex, setSelectedTitleIndex] = useState(null) //индекс изменяемого заголовка папки
   const [titles, addTitle] = useState(null) // массив, содержащий имена папкок
+
+  const [addTaskFolder, setAddTaskFolder] = useState(null)
 
   const editTitle = (index, value) => {
     setTitle(value)
@@ -16,7 +22,7 @@ const Content = ({ folders, whenAddTask }) => {
   useEffect(() => {
     folders && addTitle(folders.map(folder => (folder.name)))
     console.log('useEffect')
-  }, [folders])
+  }, [folders]) //каждый раз, когда обновляется состояние folder, обновляется состояние titles
 
   const comfirmTitle = (index, value) => {
     if (index !== null && value) {
@@ -33,6 +39,12 @@ const Content = ({ folders, whenAddTask }) => {
     }
   }
 
+
+
+  const closeAddTaskForm = () => {
+    setAddTaskFolder(null)
+  }
+
   return (
     <div className="foldersBox">
       <ul className="foldersList grid">
@@ -45,6 +57,10 @@ const Content = ({ folders, whenAddTask }) => {
             folder.name && //Если существует имя папки, произойдет рендер
 
             <li className="folder" key={index}>
+              <IoIosClose
+                className="closeFolder"
+                onClick={() => whenRemoveFolder(index)}
+              />
               <input
                 className="folder__name"
                 type="text"
@@ -57,18 +73,26 @@ const Content = ({ folders, whenAddTask }) => {
               <ul className="task ul">
                 {folder.tasks.map((tasks, index) => (
                   <ul className="task li" key={index}>
-                    <h4 className="task__name">{tasks.name}</h4>
-                    {/* <input
-                      className="task__name"
-                      type="text"
-                      value={tasks.name} /> */}
+                    <h4 className="task__name"
+                      style={{ color: folder.color }}
+                    >{tasks.name}</h4>
                     <p className="task__discription">{tasks.discription}</p>
                   </ul>
                 ))}
               </ul>
-              <div className="addTask">
-                <p className="addTask-btn" onClick={() => whenAddTask(folder.id)}>+ Add task...</p>
-              </div>
+              {index === addTaskFolder &&
+                <AddTaskForm
+                  folder={folder}
+                  index={index}
+                  addTaskOnFolders={addTaskOnFolders}
+                  closeAddTaskForm={closeAddTaskForm}
+                />
+              }
+              {index !== addTaskFolder &&
+                <div className="addTask">
+                  <p className="addTask-btn" onClick={() => setAddTaskFolder(index)}>+ Add task...</p>
+                </div>
+              }
             </li>
           ))
         }

@@ -1,37 +1,65 @@
-$pad: 3vh;
+$pad: 2vh;
 
 .foldersBox {
   background-color: rgb(104, 97, 170);
   width: 100vw;
-  height: 100vh - 2 * $pad;
+  min-height: 100vh - 2 * $pad;
   padding: $pad $pad/2 $pad $pad/2;
   box-shadow: inset 10px 0px 100px 2px rgba(0, 0, 0, 0.05);
+  // overflow-x: hidden;
 }
 
 .foldersList {
   &.grid {
     height: auto;
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    // grid-template-rows: repeat(auto-fit, minmax(1px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    // grid-gap: 10px;
+    // grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 }
 
 .folder {
   background-color: rgb(243, 243, 243);
   padding: 10px;
-  border-radius: 30px;
+  border-radius: 25px;
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.07);
   text-align: center;
-  margin: 0 0 auto 0;
+  margin: 10px;
+  position: relative;
+  width: 100%;
+  .closeFolder {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: -6px;
+    right: -7px;
+    background-color: rgb(247, 247, 247);
+    border-radius: 50px;
+    border: 3px solid rgb(228, 225, 225);
+    color: rgb(150, 150, 150);
+    transition: all 0.2s ease;
+    filter: opacity(0.2);
+    &:hover {
+      color: rgb(78, 78, 78);
+      filter: opacity(0.6);
+    }
+    &:active {
+      color: rgb(70, 70, 70);
+      border: 3px solid rgb(192, 192, 192);
+    }
+  }
+  &:hover {
+    background-color: rgb(240, 240, 240);
+  }
   &__name {
-    background-color: rgb(248, 248, 248);
+    background-color: rgb(247, 247, 247);
     text-align: center;
     margin-bottom: 10px;
-    width: 90%;
+    width: 96%;
     padding: 5px 6px 5px 6px;
-    font-size: 14px;
+    font-size: 40px;
     border: none;
     border-radius: 10px;
     box-shadow: 0px 14px 20px rgba(0, 0, 0, 0.06);
@@ -45,21 +73,24 @@ $pad: 3vh;
     justify-content: space-around;
   }
   &.li {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
     margin: 10px 4px 10px 0;
-    border: 2px solid rgb(250, 250, 250);
+    border: 2px solid rgb(255, 255, 255);
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.04);
     border-radius: 15px;
     padding: 0 20px;
-    width: auto;
     text-align: center;
   }
   &__name {
-    font-size: 1.5vw;
+    font-size: 23px;
     margin-top: 5px;
     margin-bottom: 4px;
+    font-weight: normal;
   }
   &__discription {
-    font-size: 1.5vw;
+    font-size: 18px;
     margin-bottom: 10px;
   }
 }
@@ -67,12 +98,12 @@ $pad: 3vh;
 .addTask {
   width: 100%;
   height: 10px;
-  padding-top: 1vw;
-  padding-bottom: 2vw;
+  padding-top: 10px;
+  padding-bottom: 10px;
 
   &-btn {
-    font-size: 2vw;
-    color: rgb(216, 216, 216);
+    font-size: 14px;
+    color: rgb(190, 190, 190);
     transition: all 0.2s ease;
     cursor: pointer;
     &:hover {
@@ -81,45 +112,5 @@ $pad: 3vh;
     &:active {
       color: rgb(77, 77, 77);
     }
-  }
-}
-
-@media (max-width: 900px) {
-  .task.ul {
-    padding: 0px;
-    margin: 0px;
-  }
-  .task.li {
-    padding: 0px 5px;
-    margin: 4px 2px;
-    width: auto;
-  }
-  .task__name {
-    font-size: 2vw;
-  }
-  .task__discription {
-    font-size: 2vw;
-  }
-  .addTask {
-    padding-top: 1vh;
-    padding-bottom: 1vh;
-  }
-}
-
-@media (max-height: 390px) {
-  .task.ul {
-    padding: 0px;
-    margin: 0px;
-  }
-  .task.li {
-    padding: 0px 5px;
-    margin: 4px 2px;
-    width: auto;
-  }
-  .task__name {
-    font-size: 3vh;
-  }
-  .task__discription {
-    font-size: 3vh;
   }
 }

@@ -1,0 +1,66 @@
+.addTaskForm {
+  width: 97%;
+  margin: 0 auto;
+  height: auto;
+  position: relative;
+  &-box {
+    padding-top: 10px;
+    border: 2px solid #ffffff;
+    border-radius: 20px;
+    width: auto;
+    height: auto;
+    box-shadow: 0px 16px 17px rgba(0, 0, 0, 0.03);
+    display: flexbox;
+    flex-wrap: nowrap;
+
+    .close {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      width: 30px;
+      height: 30px;
+      color: rgb(219, 219, 219);
+      transition: all 0.1s ease;
+      &:hover {
+        color: rgb(184, 184, 184);
+      }
+      &:active {
+        color: rgb(153, 15, 15);
+      }
+    }
+
+    input {
+      text-align: center;
+      margin: 5px;
+      width: auto;
+      border: none;
+      font-size: 14px;
+      padding: 4px 2%;
+      margin-bottom: 10px;
+      border-radius: 20px;
+      box-shadow: 0px 16px 17px rgba(0, 0, 0, 0.03);
+      &::placeholder {
+        font-size: 12px;
+        color: rgb(151, 150, 150);
+      }
+    }
+    button {
+      border: 3px solid rgb(240, 238, 238);
+      margin-bottom: 8px;
+      padding: 5px 20px;
+      color: rgb(107, 107, 107);
+      font-size: 13px;
+      border-radius: 20px;
+      background-color: rgb(255, 255, 255);
+      box-shadow: 0px 16px 17px rgba(0, 0, 0, 0.02);
+      transition: all 0.1s ease;
+      &:hover {
+        background-color: rgb(245, 245, 245);
+      }
+      &:active {
+        background-color: rgb(255, 224, 46);
+        color: rgb(255, 255, 255);
+      }
+    }
+  }
+}

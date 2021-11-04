@@ -11,7 +11,7 @@ function Folders({ folders, whenRemove, whenSelected }) {
 
   const setActiveFolder = (index) => {
     setSelectedFolder(index);
-    whenSelected(index)
+    // whenSelected(index)
   }
 
 

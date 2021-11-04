@@ -38,14 +38,21 @@ function AddFolderForm({ addNewFolder }) {
     setInputValue('')
   }
 
+
+
   return (
-    <div>
+    <div className="nav_addFolder-box">
       <div className="nav__addFolder" onClick={() => setVisableForm(true)}>
         <AiFillFolderAdd className="nav__addFolder-icon" />
       </div>
 
       {visableForm && (
-        <div className="addFolderForm" >
+        <div
+          className="addFolderForm"
+        >
+
+
+
           <IoIosClose className="addFolderForm-close" onClick={() => setVisableForm(false)} />
 
           <input

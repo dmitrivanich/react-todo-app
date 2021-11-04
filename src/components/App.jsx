@@ -10,9 +10,6 @@ function App() {
   const [folders, setFolders] = useState(null)
   const [activeFolders, setActiveFolders] = useState(folders)
 
-  // const [removedFolder, setRemovedFolder] = useState(null)
-
-
 
   useEffect(() => {
     axios.get('http://localhost:3001/folders').then(({ data }) => {
@@ -26,20 +23,17 @@ function App() {
     axios.post('http://localhost:3001/folders', { ...newFolder }).then(({ data }) => {
       setFolders([...folders, data])
       setActiveFolders([...folders, data])
-
-
     })
   }
 
   const whenRemove = (index) => {
-    const arr = [...folders]
-    arr.splice(index, 1)
-    setFolders(arr)
-    axios.delete(`http://localhost:3001/folders/${folders[index].id}`)
-  }
+    const newFolders = [...folders]
+    newFolders.splice(index, 1)
+    console.log(newFolders)
 
-  const whenAddTask = (index) => {
-    console.log(index)
+    setFolders([...newFolders])
+    setActiveFolders([...newFolders])
+    axios.delete(`http://localhost:3001/folders/${folders[index].id}`)
   }
 
   const whenSelected = (index) => {
@@ -48,6 +42,27 @@ function App() {
 
   const whenMenuActive = () => {
     setActiveFolders(folders)
+  }
+
+  const addTaskOnFolders = (name, disk, index, id) => {
+    var newFolders = [...folders]
+    var folder = folders[index]
+    var newTasks = folder.tasks
+
+    if (name && disk) {
+      newTasks.push({
+        "name": name,
+        "discription": disk
+      })
+
+      folder.tasks = [...newTasks]
+      newFolders.splice(index, 1, folder)
+      setFolders(newFolders)
+
+      axios.patch(`http://localhost:3001/folders/${id}`, {
+        tasks: newTasks
+      })
+    }
   }
 
   return (
@@ -61,7 +76,8 @@ function App() {
       />
       <Content
         folders={activeFolders}
-        whenAddTask={whenAddTask}
+        addTaskOnFolders={addTaskOnFolders}
+        whenRemoveFolder={whenRemove}
       />
     </div>
   );
