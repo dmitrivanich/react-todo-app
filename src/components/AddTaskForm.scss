@@ -3,7 +3,9 @@
   margin: 0 auto;
   height: auto;
   position: relative;
+
   &-box {
+    margin: 10px 0;
     padding-top: 10px;
     border: 2px solid #ffffff;
     border-radius: 20px;
@@ -15,14 +17,19 @@
 
     .close {
       position: absolute;
-      top: 3px;
-      right: 3px;
+      top: -10px;
+      right: -10px;
       width: 30px;
       height: 30px;
-      color: rgb(219, 219, 219);
-      transition: all 0.1s ease;
+      color: rgb(156, 156, 156);
+      background-color: rgb(243, 243, 243);
+      filter: opacity(0.5);
+      transition: all 0.2s ease;
+      border-radius: 20px;
+      border: 2px solid white;
       &:hover {
         color: rgb(184, 184, 184);
+        filter: opacity(1);
       }
       &:active {
         color: rgb(153, 15, 15);
@@ -32,28 +39,44 @@
     input {
       text-align: center;
       margin: 5px;
-      width: auto;
+      width: 92%;
       border: none;
-      font-size: 14px;
+      font-size: 20px;
       padding: 4px 2%;
       margin-bottom: 10px;
       border-radius: 20px;
       box-shadow: 0px 16px 17px rgba(0, 0, 0, 0.03);
+      font-size: 40px;
+      color: rgb(49, 49, 49);
       &::placeholder {
-        font-size: 12px;
-        color: rgb(151, 150, 150);
+        color: rgb(197, 197, 197);
       }
     }
+
+    .disk {
+      text-align: left;
+      width: 92%;
+      border: none;
+      padding: 2%;
+      border-radius: 10px;
+      font-size: 25px;
+      color: rgb(102, 102, 102);
+      &::placeholder {
+        color: rgb(197, 197, 197);
+      }
+    }
+
     button {
-      border: 3px solid rgb(240, 238, 238);
-      margin-bottom: 8px;
+      margin: 5px 0 15px 0;
       padding: 5px 20px;
-      color: rgb(107, 107, 107);
-      font-size: 13px;
-      border-radius: 20px;
+      color: rgb(172, 172, 172);
+      font-size: 30px;
+      border-radius: 10px;
       background-color: rgb(255, 255, 255);
-      box-shadow: 0px 16px 17px rgba(0, 0, 0, 0.02);
+      box-shadow: 0px 16px 20px rgba(0, 0, 0, 0.03);
       transition: all 0.1s ease;
+      border: none;
+      width: 96%;
       &:hover {
         background-color: rgb(245, 245, 245);
       }
@@ -61,6 +84,27 @@
         background-color: rgb(255, 224, 46);
         color: rgb(255, 255, 255);
       }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  input.name {
+    font-size: 6vw;
+    height: 30px;
+    &::placeholder {
+      font-size: 6vw;
+    }
+  }
+
+  .disk {
+    font-size: 5vw;
+    line-height: 6vw;
+    text-align: left;
+    padding-bottom: 10px;
+
+    &::placeholder {
+      font-size: 5vw;
     }
   }
 }

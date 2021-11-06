@@ -8,7 +8,7 @@ import { AiFillFolderAdd } from 'react-icons/ai';
 import "./AddFolderForm.scss";
 
 
-function AddFolderForm({ addNewFolder }) {
+function AddFolderForm({ addNewFolder, sidebarView }) {
 
   const colors = [
     ['#dbdad6', '#beab9e', '#b3814e', '#723505', '#202020'],
@@ -49,6 +49,7 @@ function AddFolderForm({ addNewFolder }) {
       {visableForm && (
         <div
           className="addFolderForm"
+          style={sidebarView ? { top: "-260px" } : { display: "block" }}
         >
 
 

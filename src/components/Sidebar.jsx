@@ -1,23 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Folders from "./Folders.jsx"
 import AddFolderForm from './AddFolderForm.jsx';
-import { ImHome } from "react-icons/im";
+import { MdGpsFixed, MdGpsNotFixed } from "react-icons/md";
+
 import './Sidebar.scss';
+
 
 function Sidebar({ addNewFolder, folders, whenRemove, whenSelected, whenMenuActive }) {
 
+  const [sidebarView, setSidebarView] = useState(true)
+
   const menu = () => {
     whenMenuActive()
+    setSidebarView(!sidebarView)
   }
 
 
   return (
-    <div className="nav">
+    <div className="nav" style={sidebarView ? { bottom: "0px" } : { display: "block" }} >
       <div className="nav__sidebar">
 
-        <ul className="nav__menu">
-          <li className='nav__menu-list' onClick={() => menu()}>
-            <ImHome size="1em" />
+        <ul className="nav__menu" onClick={() => menu()}>
+          <li className='nav__menu-list' >
+            {sidebarView ? <MdGpsFixed /> : <MdGpsNotFixed />}
           </li>
         </ul>
 
@@ -27,7 +32,10 @@ function Sidebar({ addNewFolder, folders, whenRemove, whenSelected, whenMenuActi
           whenSelected={whenSelected}
         />
 
-        <AddFolderForm addNewFolder={addNewFolder} />
+        <AddFolderForm
+          addNewFolder={addNewFolder}
+          sidebarView={sidebarView}
+        />
 
       </div>
     </div >

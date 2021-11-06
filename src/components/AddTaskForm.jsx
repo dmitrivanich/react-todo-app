@@ -34,14 +34,18 @@ function AddTaskForm({ folder, index, addTaskOnFolders, closeAddTaskForm }) {
           onChange={e => { setName(e.target.value) }}
         />
 
-        <input className="disk"
+        <textarea className="disk"
+          cols="20"
           type="text"
+          maxlength="5000"
+          rows="5"
+          required
           value={disk}
           placeholder="Enter task discription..."
           onChange={e => { setDisk(e.target.value) }}
         />
 
-        <button onClick={onAddTask}>AddTask</button>
+        <button onClick={onAddTask}>+ AddTask +</button>
 
 
       </div>
