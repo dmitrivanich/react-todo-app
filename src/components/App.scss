@@ -24,7 +24,6 @@ html::-webkit-scrollbar-thumb {
 }
 
 html::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
   border-radius: 1px;
   background-color: #610000;
 }
@@ -38,4 +37,6 @@ body {
 
 .all {
   display: flex;
+  text-decoration: none;
+  border: none;
 }

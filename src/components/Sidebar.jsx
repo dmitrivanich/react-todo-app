@@ -6,14 +6,16 @@ import { MdGpsFixed, MdGpsNotFixed } from "react-icons/md";
 import './Sidebar.scss';
 
 
-function Sidebar({ addNewFolder, folders, whenRemove, whenSelected, whenMenuActive }) {
+
+
+function Sidebar({ addNewFolder, folders, whenRemove, whenSelected, activeFolder }) {
 
   const [sidebarView, setSidebarView] = useState(true)
 
   const menu = () => {
-    whenMenuActive()
     setSidebarView(!sidebarView)
   }
+
 
 
   return (
@@ -30,6 +32,7 @@ function Sidebar({ addNewFolder, folders, whenRemove, whenSelected, whenMenuActi
           folders={folders}
           whenRemove={whenRemove}
           whenSelected={whenSelected}
+          activeFolder={activeFolder}
         />
 
         <AddFolderForm

@@ -9,6 +9,7 @@ function App() {
 
   const [folders, setFolders] = useState(null)
   const [activeFolders, setActiveFolders] = useState(folders)
+  const [actFolderIndex, setActFolderIndex] = useState([0])
 
 
   useEffect(() => {
@@ -40,10 +41,6 @@ function App() {
     setActiveFolders([folders[index]])
   }
 
-  const whenMenuActive = () => {
-    setActiveFolders(folders)
-  }
-
   const addTaskOnFolders = (name, disk, index, id) => {
     var newFolders = [...folders]
     var folder = folders[index]
@@ -65,25 +62,35 @@ function App() {
     }
   }
 
+  const activeFolder = (index) => {
+    console.log("Выбрана папка с индексом " + index)
+    setActFolderIndex(index)
+
+  }
+
   return (
+
     <div className="all">
       <Sidebar
         addNewFolder={addNewFolder}
         folders={folders}
         whenRemove={whenRemove}
         whenSelected={whenSelected}
-        whenMenuActive={whenMenuActive}
+        activeFolder={activeFolder}
       />
+
       <Content
-        folders={activeFolders}
+        folders={activeFolders &&
+          actFolderIndex ? [activeFolders[actFolderIndex]] : activeFolders
+        }
         addTaskOnFolders={addTaskOnFolders}
         whenRemoveFolder={whenRemove}
       />
     </div>
+
   );
+
 }
 
+
 export default App;
-
-
-//РАЗРАБОТАТЬ УДАЛЕНИЕ ПАПКИ

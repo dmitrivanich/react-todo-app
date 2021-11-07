@@ -40,7 +40,6 @@ const Content = ({ folders, addTaskOnFolders, whenRemoveFolder }) => {
   }
 
 
-
   const closeAddTaskForm = () => {
     setAddTaskFolder(null)
   }
@@ -51,6 +50,7 @@ const Content = ({ folders, addTaskOnFolders, whenRemoveFolder }) => {
 
         {
           folders &&
+
 
           folders.map((folder, index) => (
 
@@ -94,6 +94,8 @@ const Content = ({ folders, addTaskOnFolders, whenRemoveFolder }) => {
                 </div>
               }
             </li>
+
+
           ))
         }
 
