@@ -1,22 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import AddTaskForm from './AddTaskForm';
 import './Content.scss'
-
+import classNames from 'classnames';
 import axios from 'axios';
 import { IoIosClose } from 'react-icons/io';
 
 
-const Content = ({ folders, addTaskOnFolders, whenRemoveFolder }) => {
+
+const Content = ({ folders, addTaskOnFolders, whenRemoveFolder, whenTaskRemove }) => {
 
   const [title, setTitle] = useState(null) //Новое название папки
   const [selectedTitleIndex, setSelectedTitleIndex] = useState(null) //индекс изменяемого заголовка папки
   const [titles, addTitle] = useState(null) // массив, содержащий имена папкок
-
   const [addTaskFolder, setAddTaskFolder] = useState(null)
+  const [info, setInfo] = useState(false)
+
+
 
   const editTitle = (index, value) => {
     setTitle(value)
     setSelectedTitleIndex(index)
+    setInfo(true)
   }
 
   useEffect(() => {
@@ -37,12 +41,18 @@ const Content = ({ folders, addTaskOnFolders, whenRemoveFolder }) => {
         }
       }))
     }
+    setInfo(false)
   }
 
 
   const closeAddTaskForm = () => {
     setAddTaskFolder(null)
   }
+
+  const removeTask = (folderID, taskIndex) => {
+    whenTaskRemove(folderID, taskIndex)
+  }
+
 
   return (
     <div className="foldersBox">
@@ -61,6 +71,9 @@ const Content = ({ folders, addTaskOnFolders, whenRemoveFolder }) => {
                 className="closeFolder"
                 onClick={() => whenRemoveFolder(index)}
               />
+              <span
+                className={classNames("enter", { "active": selectedTitleIndex === index && info })}
+              >Press "Enter" for save...</span>
               <input
                 className="folder__name"
                 type="text"
@@ -69,14 +82,23 @@ const Content = ({ folders, addTaskOnFolders, whenRemoveFolder }) => {
                 onChange={(e) => { editTitle(index, e.target.value) }}
                 onKeyPress={e => { e.key === 'Enter' && comfirmTitle(selectedTitleIndex, title) }}
               />
-
               <ul className="task ul">
-                {folder.tasks.map((tasks, index) => (
-                  <ul className="task li" key={index}>
+                {folder.tasks.map((task, index) => (
+                  <ul
+                    className="task li"
+                    key={index}
+
+                  >
+
+                    <IoIosClose
+                      className="removeTask"
+                      onClick={() => removeTask(folder.id, index)}
+                    />
+
                     <h4 className="task__name"
                       style={{ color: folder.color }}
-                    >{tasks.name}</h4>
-                    <p className="task__discription">{tasks.discription}</p>
+                    >{task.name}</h4>
+                    <p className="task__discription">{task.discription}</p>
                   </ul>
                 ))}
               </ul>

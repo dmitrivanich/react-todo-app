@@ -8,18 +8,12 @@ import { AiFillFolderOpen } from "react-icons/ai"
 
 
 
-function Folders({ folders, whenRemove, activeFolder }) {
+function Folders({ folders, whenRemove }) {
   const [selectedFolder, setSelectedFolder] = useState(null)
 
 
   const setActiveFolder = (index) => {
     setSelectedFolder(index);
-    activeFolder(index)
-    if (index === selectedFolder) {
-      setSelectedFolder(null)
-      activeFolder(null)
-    }
-
 
   }
 

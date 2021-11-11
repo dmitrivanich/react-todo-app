@@ -37,7 +37,6 @@ function AddTaskForm({ folder, index, addTaskOnFolders, closeAddTaskForm }) {
         <textarea className="disk"
           cols="20"
           type="text"
-          maxlength="5000"
           rows="5"
           required
           value={disk}

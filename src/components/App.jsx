@@ -8,14 +8,12 @@ import axios from 'axios';
 function App() {
 
   const [folders, setFolders] = useState(null)
-  const [activeFolders, setActiveFolders] = useState(folders)
-  const [actFolderIndex, setActFolderIndex] = useState([0])
+
 
 
   useEffect(() => {
     axios.get('http://localhost:3001/folders').then(({ data }) => {
       setFolders(data)
-      setActiveFolders(data)
     })
 
   }, [])
@@ -23,7 +21,6 @@ function App() {
   const addNewFolder = (newFolder) => {
     axios.post('http://localhost:3001/folders', { ...newFolder }).then(({ data }) => {
       setFolders([...folders, data])
-      setActiveFolders([...folders, data])
     })
   }
 
@@ -33,13 +30,34 @@ function App() {
     console.log(newFolders)
 
     setFolders([...newFolders])
-    setActiveFolders([...newFolders])
+
     axios.delete(`http://localhost:3001/folders/${folders[index].id}`)
   }
 
-  const whenSelected = (index) => {
-    setActiveFolders([folders[index]])
+
+  const whenTaskRemove = (folderID, taskIndex) => {
+    console.log(folderID, taskIndex)
+
+    let folder = folders.filter(folder => (
+      folder.id === folderID
+    )) //Получаем папку по ID
+
+    let newTask = folder[0].tasks.filter((task, index) => (
+      index !== taskIndex
+    ))
+
+    let newFolders = folders.map(oldFolder => (
+      folder.id !== folderID ? oldFolder : folder
+    ))
+
+    folder[0].tasks = newTask //Заменяю прошлые такски отфильтрованными
+    setFolders(newFolders)
+
+    axios.patch(`http://localhost:3001/folders/${folderID}`, {
+      tasks: newTask
+    })
   }
+
 
   const addTaskOnFolders = (name, disk, index, id) => {
     var newFolders = [...folders]
@@ -62,11 +80,8 @@ function App() {
     }
   }
 
-  const activeFolder = (index) => {
-    console.log("Выбрана папка с индексом " + index)
-    setActFolderIndex(index)
 
-  }
+
 
   return (
 
@@ -75,16 +90,13 @@ function App() {
         addNewFolder={addNewFolder}
         folders={folders}
         whenRemove={whenRemove}
-        whenSelected={whenSelected}
-        activeFolder={activeFolder}
       />
 
       <Content
-        folders={activeFolders &&
-          actFolderIndex ? [activeFolders[actFolderIndex]] : activeFolders
-        }
+        folders={folders}
         addTaskOnFolders={addTaskOnFolders}
         whenRemoveFolder={whenRemove}
+        whenTaskRemove={whenTaskRemove}
       />
     </div>
 
