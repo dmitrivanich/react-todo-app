@@ -63,6 +63,18 @@
     display: flex;
     margin: 0 10px 0 5px;
     overflow-x: auto;
+
+    &::-webkit-scrollbar {
+      height: 5px;
+      background-color: #f9f9fd;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: #cfcfcf;
+      &:hover {
+        background-color: #c4c4c4;
+      }
+    }
     //иконка папки
     &-folderIcon {
       width: 20px;

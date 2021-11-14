@@ -8,7 +8,7 @@ import './Sidebar.scss';
 
 
 
-function Sidebar({ addNewFolder, folders, whenRemove }) {
+function Sidebar({ addNewFolder, folders, whenRemove, whenFolderIconClick }) {
 
   const [sidebarView, setSidebarView] = useState(true)
 
@@ -31,7 +31,7 @@ function Sidebar({ addNewFolder, folders, whenRemove }) {
         <Folders
           folders={folders}
           whenRemove={whenRemove}
-
+          whenFolderIconClick={whenFolderIconClick}
         />
 
         <AddFolderForm

@@ -55,6 +55,7 @@
 
     .time {
       color: rgb(197, 197, 197);
+      height: 40px;
     }
 
     .disk {
@@ -62,6 +63,7 @@
       width: 92%;
       border: none;
       padding: 2%;
+      margin-top: 5px;
       border-radius: 10px;
       font-size: 25px;
       color: rgb(102, 102, 102);
@@ -81,6 +83,7 @@
       transition: all 0.1s ease;
       border: none;
       width: 96%;
+
       &:hover {
         background-color: rgb(245, 245, 245);
       }

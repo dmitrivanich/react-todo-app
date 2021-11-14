@@ -5,7 +5,7 @@ import { IoIosClose } from 'react-icons/io';
 function AddTaskForm({ folder, index, addTaskOnFolders, closeAddTaskForm }) {
   const [name, setName] = useState('')
   const [disk, setDisk] = useState('')
-  const [time, setTime] = useState(``)
+  const [time, setTime] = useState('')
 
 
   const onAddTask = () => {

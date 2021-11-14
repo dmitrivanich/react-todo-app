@@ -8,16 +8,17 @@ import { AiFillFolderOpen } from "react-icons/ai"
 
 
 
-function Folders({ folders, whenRemove }) {
+function Folders({ folders, whenRemove, whenFolderIconClick }) {
   const [selectedFolder, setSelectedFolder] = useState(null)
 
 
   const setActiveFolder = (index) => {
     index === selectedFolder ?
       setSelectedFolder(null)
-      : setSelectedFolder(index);
-  }
+      : setSelectedFolder(0);
 
+    whenFolderIconClick(index)
+  }
 
   return (
     <ul className="nav__folders">

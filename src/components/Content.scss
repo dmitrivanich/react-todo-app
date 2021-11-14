@@ -1,4 +1,4 @@
-$pad: 2vh;
+$pad: 1vh; //отступ от краёв экрана
 
 .foldersBox {
   background-color: rgb(202, 202, 202);
@@ -10,11 +10,13 @@ $pad: 2vh;
 }
 
 .foldersList {
+  overflow-x: none;
   &.grid {
     height: auto;
     display: flex;
     flex-wrap: wrap;
     overflow-y: auto;
+
     // grid-gap: 10px;
     // grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
@@ -33,6 +35,7 @@ $pad: 2vh;
   transition: all 0.3s ease-out;
   .closeFolder {
     position: absolute;
+    cursor: pointer;
     width: 30px;
     height: 30px;
     top: -8px;
@@ -89,7 +92,6 @@ $pad: 2vh;
   }
 
   .task__discription {
-    margin: 0 0 0 20px;
     width: 70vw;
     font-size: 5vw;
     line-height: 6vw;
@@ -97,9 +99,27 @@ $pad: 2vh;
     padding-bottom: 10px;
   }
   ul.task.li {
-    padding: 0;
+    padding: 5px 0;
+    margin: 10px;
   }
   h4.task__name {
     padding-bottom: 4px;
+  }
+}
+
+@media (min-width: 600px) {
+  .foldersList {
+    &.grid {
+      height: auto;
+      display: flex;
+      flex-wrap: wrap;
+      overflow-y: auto;
+      overflow-x: hidden;
+      grid-gap: 20px;
+    }
+  }
+  .folder {
+    max-width: 550px;
+    margin: 10px auto;
   }
 }

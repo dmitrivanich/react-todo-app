@@ -7,13 +7,14 @@ import axios from 'axios';
 import { IoIosClose } from 'react-icons/io';
 
 
-const Content = ({ folders, addTaskOnFolders, whenRemoveFolder, whenTaskRemove }) => {
+const Content = ({ folders, addTaskOnFolders, whenRemoveFolder, whenTaskRemove, whenTaskComplete }) => {
 
   const [title, setTitle] = useState(null) //Новое название папки
   const [selectedTitleIndex, setSelectedTitleIndex] = useState(null) //индекс изменяемого заголовка папки
   const [titles, addTitle] = useState(null) // массив, содержащий имена папкок
   const [addTaskFolder, setAddTaskFolder] = useState(null)
   const [info, setInfo] = useState(false)
+
 
 
 
@@ -25,7 +26,6 @@ const Content = ({ folders, addTaskOnFolders, whenRemoveFolder, whenTaskRemove }
 
   useEffect(() => {
     folders && addTitle(folders.map(folder => (folder.name)))
-    console.log('useEffect')
   }, [folders]) //каждый раз, когда обновляется состояние folder, обновляется состояние titles
 
   const comfirmTitle = (index, value) => {
@@ -51,7 +51,6 @@ const Content = ({ folders, addTaskOnFolders, whenRemoveFolder, whenTaskRemove }
 
 
 
-
   return (
     <div className="foldersBox">
       <ul className="foldersList grid">
@@ -64,7 +63,9 @@ const Content = ({ folders, addTaskOnFolders, whenRemoveFolder, whenTaskRemove }
 
             folder.name && //Если существует имя папки, произойдет рендер
 
-            <li className="folder" key={index}>
+            <li className="folder"
+              key={index}
+            >
               <IoIosClose
                 className="closeFolder"
                 onClick={() => whenRemoveFolder(index)}
@@ -84,6 +85,7 @@ const Content = ({ folders, addTaskOnFolders, whenRemoveFolder, whenTaskRemove }
               <Tasks
                 folder={folder}
                 whenTaskRemove={whenTaskRemove}
+                whenTaskComplete={whenTaskComplete}
               />
 
               {index === addTaskFolder &&

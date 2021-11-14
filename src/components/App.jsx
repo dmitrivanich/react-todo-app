@@ -25,7 +25,6 @@ function App() {
   const whenRemove = (index) => {
     const newFolders = [...folders]
     newFolders.splice(index, 1)
-    console.log(newFolders)
 
     setFolders([...newFolders])
 
@@ -34,7 +33,6 @@ function App() {
 
 
   const whenTaskRemove = (folderID, taskIndex) => {
-    console.log(folderID, taskIndex)
 
     let folder = folders.filter(folder => (
       folder.id === folderID
@@ -56,6 +54,30 @@ function App() {
     })
   }
 
+  const whenTaskComplete = (folderID, taskIndex) => {
+
+    let folder = folders.filter(folder => (
+      folder.id === folderID
+    )) //Получаем папку по ID
+
+    let newTask = folder[0].tasks.filter((task, index) => (
+      index === taskIndex
+    )) //Получаем задачу по индексу
+
+    newTask[0].completed = !newTask[0].completed
+    //Замена статуса выполнения задачи на противоположный
+
+    let newFolders = folders.map(oldFolder => (
+      folder.id !== folderID ? oldFolder : folder
+    ))
+
+    console.log(newTask[0].completed)
+    setFolders(newFolders)
+
+    axios.patch(`http://localhost:3001/folders/${folderID}`, {
+      tasks: newTask
+    })
+  }
 
   const addTaskOnFolders = (name, time, disk, index, id) => {
     var newFolders = [...folders]
@@ -67,7 +89,8 @@ function App() {
         "name": name,
         "postTime": `${new Date().getHours().toString()}:${new Date().getMinutes().toString()}:${new Date().getSeconds().toString()}`,
         "time": time,
-        "discription": disk
+        "discription": disk,
+        "completed": false
       })
 
       folder.tasks = [...newTasks]
@@ -82,8 +105,16 @@ function App() {
     }
   }
 
+  const whenFolderIconClick = (index) => {
+    var newFolders = folders
+    var selectedFolder = folders[index]
 
+    newFolders.splice(index, 1)
+    newFolders = [selectedFolder, ...newFolders]
 
+    setFolders(newFolders)
+
+  }
 
   return (
 
@@ -92,6 +123,7 @@ function App() {
         addNewFolder={addNewFolder}
         folders={folders}
         whenRemove={whenRemove}
+        whenFolderIconClick={whenFolderIconClick}
       />
 
       <Content
@@ -99,6 +131,7 @@ function App() {
         addTaskOnFolders={addTaskOnFolders}
         whenRemoveFolder={whenRemove}
         whenTaskRemove={whenTaskRemove}
+        whenTaskComplete={whenTaskComplete}
       />
     </div>
 

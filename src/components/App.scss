@@ -13,19 +13,22 @@
   scroll-behavior: smooth;
 }
 
-html::-webkit-scrollbar {
+body::-webkit-scrollbar {
   width: 11px;
   background-color: #f9f9fd;
 }
 
-html::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background-color: #7e0101;
+  background-color: #cfcfcf;
+  &:hover {
+    background-color: #c4c4c4;
+  }
 }
 
-html::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track {
   border-radius: 1px;
-  background-color: #610000;
+  background-color: #a8a8a8;
 }
 
 body {
