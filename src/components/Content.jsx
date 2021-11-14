@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import Tasks from './Tasks';
 import AddTaskForm from './AddTaskForm';
 import './Content.scss'
 import classNames from 'classnames';
 import axios from 'axios';
 import { IoIosClose } from 'react-icons/io';
-
 
 
 const Content = ({ folders, addTaskOnFolders, whenRemoveFolder, whenTaskRemove }) => {
@@ -49,9 +49,7 @@ const Content = ({ folders, addTaskOnFolders, whenRemoveFolder, whenTaskRemove }
     setAddTaskFolder(null)
   }
 
-  const removeTask = (folderID, taskIndex) => {
-    whenTaskRemove(folderID, taskIndex)
-  }
+
 
 
   return (
@@ -82,26 +80,12 @@ const Content = ({ folders, addTaskOnFolders, whenRemoveFolder, whenTaskRemove }
                 onChange={(e) => { editTitle(index, e.target.value) }}
                 onKeyPress={e => { e.key === 'Enter' && comfirmTitle(selectedTitleIndex, title) }}
               />
-              <ul className="task ul">
-                {folder.tasks.map((task, index) => (
-                  <ul
-                    className="task li"
-                    key={index}
 
-                  >
+              <Tasks
+                folder={folder}
+                whenTaskRemove={whenTaskRemove}
+              />
 
-                    <IoIosClose
-                      className="removeTask"
-                      onClick={() => removeTask(folder.id, index)}
-                    />
-
-                    <h4 className="task__name"
-                      style={{ color: folder.color }}
-                    >{task.name}</h4>
-                    <p className="task__discription">{task.discription}</p>
-                  </ul>
-                ))}
-              </ul>
               {index === addTaskFolder &&
                 <AddTaskForm
                   folder={folder}

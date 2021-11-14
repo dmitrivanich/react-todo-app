@@ -13,8 +13,9 @@ function Folders({ folders, whenRemove }) {
 
 
   const setActiveFolder = (index) => {
-    setSelectedFolder(index);
-
+    index === selectedFolder ?
+      setSelectedFolder(null)
+      : setSelectedFolder(index);
   }
 
 

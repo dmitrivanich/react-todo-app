@@ -5,11 +5,13 @@ import { IoIosClose } from 'react-icons/io';
 function AddTaskForm({ folder, index, addTaskOnFolders, closeAddTaskForm }) {
   const [name, setName] = useState('')
   const [disk, setDisk] = useState('')
+  const [time, setTime] = useState(``)
+
 
   const onAddTask = () => {
     setName('')
     setDisk('')
-    addTaskOnFolders(name, disk, index, folder.id)
+    addTaskOnFolders(name, time, disk, index, folder.id)
   }
 
   const onClose = () => {
@@ -34,6 +36,16 @@ function AddTaskForm({ folder, index, addTaskOnFolders, closeAddTaskForm }) {
           onChange={e => { setName(e.target.value) }}
         />
 
+        <input
+          name="Время на выполнение"
+          className="time"
+          type="time"
+          step="2"
+          value={time}
+          placeholder="fff"
+          onChange={e => { setTime(e.target.value) }}
+        />
+
         <textarea className="disk"
           cols="20"
           type="text"
@@ -43,6 +55,7 @@ function AddTaskForm({ folder, index, addTaskOnFolders, closeAddTaskForm }) {
           placeholder="Enter task discription..."
           onChange={e => { setDisk(e.target.value) }}
         />
+
 
         <button onClick={onAddTask}>+ AddTask +</button>
 

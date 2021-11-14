@@ -9,8 +9,6 @@ function App() {
 
   const [folders, setFolders] = useState(null)
 
-
-
   useEffect(() => {
     axios.get('http://localhost:3001/folders').then(({ data }) => {
       setFolders(data)
@@ -59,7 +57,7 @@ function App() {
   }
 
 
-  const addTaskOnFolders = (name, disk, index, id) => {
+  const addTaskOnFolders = (name, time, disk, index, id) => {
     var newFolders = [...folders]
     var folder = folders[index]
     var newTasks = folder.tasks
@@ -67,6 +65,8 @@ function App() {
     if (name && disk) {
       newTasks.push({
         "name": name,
+        "postTime": `${new Date().getHours().toString()}:${new Date().getMinutes().toString()}:${new Date().getSeconds().toString()}`,
+        "time": time,
         "discription": disk
       })
 
@@ -77,6 +77,8 @@ function App() {
       axios.patch(`http://localhost:3001/folders/${id}`, {
         tasks: newTasks
       })
+    } else {
+      alert("Please, enter Name and Discription!")
     }
   }
 

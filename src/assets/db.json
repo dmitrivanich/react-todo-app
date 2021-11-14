@@ -1,3 +1,48 @@
 {
-  "folders": []
+  "folders": [
+    {
+      "id": 1,
+      "name": "Stupid tasks!",
+      "color": "#e76f3d",
+      "tasks": [
+        {
+          "name": "First task!",
+          "postTime": "2:34:45",
+          "time": "00:15:00",
+          "discription": "Drink tea and listen to musik!"
+        },
+        {
+          "name": "Testing tasks",
+          "postTime": "2:36:10",
+          "time": "00:00:02",
+          "discription": "Banalnisimo discription..."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "New Folder!",
+      "color": "#a0a90e",
+      "tasks": [
+        {
+          "name": "1",
+          "postTime": "2:39:41",
+          "time": "00:00:20",
+          "discription": "2"
+        },
+        {
+          "name": "14123",
+          "postTime": "2:41:2",
+          "time": "23:07:51",
+          "discription": "ggg"
+        },
+        {
+          "name": "0",
+          "postTime": "2:41:34",
+          "time": "23:59:59",
+          "discription": "0"
+        }
+      ]
+    }
+  ]
 }
