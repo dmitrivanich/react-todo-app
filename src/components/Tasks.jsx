@@ -51,6 +51,7 @@ function Tasks({
   const openTask = (ind) => {
     if (openTask !== null && openedTask[0] === folder.id && openedTask[1] === ind) { setOpenedTask([null, null]) }
     else { setOpenedTask([folder.id, ind]) }
+    console.log(openedTask)
   }
 
   const toSecond = (time) => {
@@ -173,8 +174,11 @@ function Tasks({
               style={{
                 // 
                 height: openedTask &&
-                  openedTask[0] === folder.id && openedTask[1] === index &&
-                  task.discription.match(/$/gm).length > 10 ? "" : "auto"
+                  task.discription.match(/$/gm).length > 10
+                  ? openedTask[0] === folder.id && openedTask[1] === index
+                    ? "auto"
+                    : ""
+                  : "auto"
               }}
               onClick={() => console.log({
                 time: task.time,
@@ -189,9 +193,8 @@ function Tasks({
           {editableTask[1] !== index && task.discription.match(/$/gm).length > 12 &&
             <button className="openTask"
               onClick={() => openTask(index)}
-            >{openedTask && openedTask[0] === folder.id && openedTask[1] === index ? "↓ show more ↓" : "↑ hide ↑"}
+            >{openedTask && openedTask[0] === folder.id && openedTask[1] === index ? "↑ hide ↑" : "↓ show more ↓"}
             </button>}
-
         </li>
       ))
       }
@@ -201,4 +204,3 @@ function Tasks({
 
 export default Tasks
 
-// {setLeftTime(minusTime(userTaskTime(task.postTime, task.time), '00:02:02'))}
