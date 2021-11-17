@@ -31,7 +31,6 @@ function App() {
     axios.delete(`http://localhost:3001/folders/${folders[index].id}`)
   }
 
-
   const whenTaskRemove = (folderID, taskIndex) => {
 
     let folder = folders.filter(folder => (
@@ -79,6 +78,13 @@ function App() {
     })
   }
 
+  const whenChangeFolderName = (folderIndex, newFoldername) => {
+    console.log(folderIndex, newFoldername)
+    const newFolders = [...folders]
+    newFolders[folderIndex].name = newFoldername
+    setFolders(newFolders)
+  }
+
   const addTaskOnFolders = (name, time, disk, index, id) => {
     var newFolders = [...folders]
     var folder = folders[index]
@@ -105,6 +111,38 @@ function App() {
     }
   }
 
+  const whenTaskEdit = (folderId, taskIndex, name, disk, time) => {
+    // console.log([folderId, taskIndex, name, time, disk])
+
+    var newFolders = [...folders]
+    var folder = folders.map(folder => folder.id === folderId)
+    var folderIndex = folder.indexOf(true)
+
+    var newTasks = folders[folderIndex].tasks
+
+    var newTask = {
+      completed: newTasks[taskIndex].completed,
+      discription: disk,
+      name: name,
+      postTime: `${new Date().getHours().toString()}:${new Date().getMinutes().toString()}:${new Date().getSeconds().toString()}`,
+      time: time
+    }
+
+    newTasks.splice(taskIndex, 1, newTask)
+    newFolders[folderIndex].tasks = newTasks
+
+
+    // console.log(newTask)
+    // console.log(newTasks)
+    // console.log(newFolders)
+
+    setFolders(newFolders)
+
+    axios.patch(`http://localhost:3001/folders/${folderId}`, {
+      tasks: newTasks
+    })
+  }
+
   const whenFolderIconClick = (index) => {
     var newFolders = folders
     var selectedFolder = folders[index]
@@ -115,6 +153,8 @@ function App() {
     setFolders(newFolders)
 
   }
+
+
 
   return (
 
@@ -130,8 +170,10 @@ function App() {
         folders={folders}
         addTaskOnFolders={addTaskOnFolders}
         whenRemoveFolder={whenRemove}
+        whenChangeFolderName={whenChangeFolderName}
         whenTaskRemove={whenTaskRemove}
         whenTaskComplete={whenTaskComplete}
+        whenTaskEdit={whenTaskEdit}
       />
     </div>
 

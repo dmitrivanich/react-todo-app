@@ -1,38 +1,37 @@
 import React, { useState } from 'react'
-import './AddTaskForm.scss'
-import { IoIosClose } from 'react-icons/io';
-import { BiMessageAltAdd } from 'react-icons/bi';
+import './EditTaskForm.scss'
+import { VscSaveAs } from 'react-icons/vsc';
 
-function AddTaskForm({ folder, index, addTaskOnFolders, closeAddTaskForm }) {
-  const [name, setName] = useState('')
-  const [disk, setDisk] = useState('')
-  const [time, setTime] = useState('')
+function AddTaskForm({
+  folderId,
+  taskIndex,
+  taskName,
+  taskTime,
+  taskDiscription,
+  confirmChanges
+}) {
+  const [name, setName] = useState(taskName)
+  const [disk, setDisk] = useState(taskDiscription)
+  const [time, setTime] = useState(taskTime)
 
 
-  const onAddTask = () => {
+  const onEdit = () => {
     if (disk.length > 1000000 || name.length > 55) {
       return
     }
 
-    addTaskOnFolders(name, time, disk, index, folder.id)
+    confirmChanges(folderId, taskIndex, name, disk, time)
+    // addTaskOnFolders(name, time, disk, index, folder.id)
     setName('')
     setDisk('')
+    setTime('')
   }
 
-  const onClose = () => {
-    setName('')
-    setDisk('')
-    closeAddTaskForm()
-  }
 
   return (
     <div className="addTaskForm">
       <div className="addTaskForm-box">
 
-        <IoIosClose
-          className="close"
-          onClick={() => onClose()}
-        />
 
         <p className="formInfo">{name.length > 55 && `Maximum number of characters! (${name.length} of 55)`}</p>
 
@@ -44,7 +43,6 @@ function AddTaskForm({ folder, index, addTaskOnFolders, closeAddTaskForm }) {
         />
 
         <input
-          name="Время на выполнение"
           className="time"
           type="time"
           step="2"
@@ -65,7 +63,7 @@ function AddTaskForm({ folder, index, addTaskOnFolders, closeAddTaskForm }) {
         />
 
 
-        <button className="addBtn" onClick={onAddTask}><BiMessageAltAdd /> Add task <BiMessageAltAdd /></button>
+        <button className="editBtn" onClick={onEdit}><VscSaveAs /> Save changes</button>
 
 
       </div>

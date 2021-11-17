@@ -20,65 +20,72 @@
     background: rgb(253, 253, 253);
     position: relative;
     user-select: none;
-
+    &:hover {
+      .taskTools {
+        display: flex;
+      }
+      .openTask {
+        display: block;
+      }
+    }
     .taskTools {
-      display: flex;
+      display: none;
       position: absolute;
       top: -10px;
       right: -10px;
       width: 80px;
       justify-content: space-between;
-    }
-    .removeTask,
-    .completeTask,
-    .editTask {
-      width: 20px;
-      height: 20px;
-      color: rgb(156, 156, 156);
-      background-color: rgb(254, 254, 254);
-      filter: opacity(0.9);
-      transition: all 0.2s ease;
-      border-radius: 20px;
-      border: 2px solid rgb(240, 240, 240);
-      cursor: pointer;
-      &:hover {
-        color: rgb(204, 46, 46);
-        filter: opacity(0.8);
+      .removeTask,
+      .completeTask,
+      .editTask {
+        width: 20px;
+        height: 20px;
+        color: rgb(156, 156, 156);
+        background-color: rgb(254, 254, 254);
+        filter: opacity(0.9);
+        transition: all 0.2s ease;
+        border-radius: 20px;
+        border: 2px solid rgb(240, 240, 240);
+        cursor: pointer;
+        &:hover {
+          color: rgb(204, 46, 46);
+          filter: opacity(0.8);
+        }
+        &:active {
+          color: rgb(99, 19, 19);
+          border: 2px solid rgb(146, 28, 28);
+        }
       }
-      &:active {
-        color: rgb(99, 19, 19);
-        border: 2px solid rgb(146, 28, 28);
+      .completeTask {
+        height: 20px;
+        color: rgb(190, 190, 190);
+        background-color: rgb(254, 254, 254);
+        filter: opacity(0.9);
+        transition: all 0.2s ease;
+        border-radius: 20px;
+        border: 2px solid rgb(240, 240, 240);
+        cursor: pointer;
+        user-select: none;
+        &:hover {
+          color: rgb(78, 204, 46);
+        }
+        &:active {
+          color: rgb(9, 255, 0);
+          border: 2px solid rgb(123, 253, 123);
+        }
       }
-    }
-    .completeTask {
-      height: 20px;
-      color: rgb(190, 190, 190);
-      background-color: rgb(254, 254, 254);
-      filter: opacity(0.9);
-      transition: all 0.2s ease;
-      border-radius: 20px;
-      border: 2px solid rgb(240, 240, 240);
-      cursor: pointer;
-      user-select: none;
-      &:hover {
-        color: rgb(78, 204, 46);
-      }
-      &:active {
-        color: rgb(179, 255, 0);
-        border: 2px solid rgb(214, 253, 123);
-      }
-    }
-    .editTask {
-      width: 16px;
-      height: 16px;
-      padding: 2px;
-      color: rgb(190, 190, 190);
-      &:hover {
-        color: rgb(201, 204, 46);
-      }
-      &:active {
-        color: rgb(219, 95, 12);
-        border: 2px solid rgb(218, 131, 73);
+      .editTask {
+        width: 16px;
+        height: 16px;
+        padding: 2px;
+        color: rgb(190, 190, 190);
+        &:hover {
+          color: rgb(201, 204, 46);
+        }
+        &:active {
+          color: rgb(218, 184, 73);
+          border: 2px solid rgb(223, 191, 88);
+        }
       }
     }
   }
@@ -93,9 +100,10 @@
     position: relative;
     .time {
       position: absolute;
-      font-size: 20px;
-      top: 0;
-      right: 20px;
+      font-size: 15px;
+      bottom: -10px;
+      right: 10px;
+      margin: 0 auto;
       color: #000;
     }
   }
@@ -128,6 +136,7 @@
 }
 
 .openTask {
+  display: none;
   width: 100%;
   font-size: 20px;
   color: rgb(202, 202, 202);

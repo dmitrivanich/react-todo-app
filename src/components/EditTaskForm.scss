@@ -1,5 +1,5 @@
 .addTaskForm {
-  width: 97%;
+  max-width: 97%;
   margin: 0 auto;
   margin-top: 30px;
   height: auto;
@@ -57,12 +57,6 @@
         color: rgb(197, 197, 197);
       }
     }
-
-    .time {
-      color: rgb(197, 197, 197);
-      height: 40px;
-    }
-
     .disk {
       text-align: left;
       width: 92%;
@@ -72,10 +66,8 @@
       border-radius: 10px;
       font-size: 25px;
       color: rgb(102, 102, 102);
-      box-shadow: 0px 16px 20px rgba(0, 0, 0, 0.03);
-      &::placeholder {
-        color: rgb(197, 197, 197);
-      }
+      resize: none;
+      overflow-x: hidden;
       &::-webkit-scrollbar {
         width: 5px;
         background-color: #f9f9fd;
@@ -92,22 +84,27 @@
       }
     }
 
-    .addBtn {
+    .time {
+      color: rgb(197, 197, 197);
+      height: 40px;
+    }
+
+    .editBtn {
       margin: 5px 0 15px 0;
       padding: 5px 20px;
-      color: rgb(102, 102, 102);
-      font-size: 30px;
+      color: rgb(85, 85, 85);
+      font-size: 26px;
       border-radius: 10px;
       background-color: rgb(255, 255, 255);
       box-shadow: 0px 16px 20px rgba(0, 0, 0, 0.03);
       transition: all 0.1s ease;
       border: none;
       width: 96%;
-      height: 50px;
+      height: auto;
       cursor: pointer;
       svg {
-        width: 20px;
-        height: 18px;
+        width: 18px;
+        height: 16px;
       }
 
       &:hover {
