@@ -5,10 +5,8 @@
     justify-content: space-around;
   }
   &.li {
-    max-width: 400px;
-    width: 100%;
-    height: auto;
-    margin: 10px 0;
+    width: 88%;
+    margin: 10px 0 10px 0;
     border: 2px solid rgb(255, 255, 255);
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.04);
     border-radius: 15px;
@@ -20,21 +18,21 @@
     background: rgb(253, 253, 253);
     position: relative;
     user-select: none;
+    transition: all 0.3s ease;
     &:hover {
       .taskTools {
-        display: flex;
-      }
-      .openTask {
-        display: block;
+        filter: opacity(1);
       }
     }
     .taskTools {
-      display: none;
+      filter: opacity(0);
+      display: flex;
       position: absolute;
       top: -10px;
       right: -10px;
       width: 80px;
       justify-content: space-between;
+      transition: filter 0.5s ease;
       .removeTask,
       .completeTask,
       .editTask {
@@ -90,7 +88,7 @@
     }
   }
   &__name {
-    font-size: 45px;
+    font-size: 1.5em;
     margin-top: 2vh;
     margin-bottom: 1vh;
     font-weight: normal;
@@ -100,8 +98,8 @@
     position: relative;
     .time {
       position: absolute;
-      font-size: 15px;
-      bottom: -10px;
+      font-size: 0.6em;
+      bottom: -5px;
       right: 10px;
       margin: 0 auto;
       color: #000;
@@ -109,34 +107,35 @@
   }
 
   &__discription {
-    font-size: 26px;
-    letter-spacing: 0.1vh;
+    font-size: 1.1em;
+    letter-spacing: 0.03em;
     margin: 15px 0;
-    text-align: left;
     line-height: 35px;
-    height: 10vh;
+    height: 13em;
     white-space: pre-line;
     color: hsl(0, 0%, 31%);
     overflow: hidden;
     position: relative;
     user-select: text;
     overflow-y: auto;
+    text-align: left;
+
     &::-webkit-scrollbar {
       width: 5px;
       background-color: #f9f9fd;
     }
     &::-webkit-scrollbar-thumb {
       border-radius: 5px;
-      background-color: #cfcfcf;
+      background-color: #e7e7e7;
+
       &:hover {
-        background-color: #c4c4c4;
+        background-color: #dddddd;
       }
     }
   }
 }
 
 .openTask {
-  display: none;
   width: 100%;
   font-size: 20px;
   color: rgb(202, 202, 202);
@@ -175,25 +174,35 @@
 }
 
 @media (max-width: 500px) {
-  .folder__name {
-    font-size: 9vw;
+  .task {
+    .li {
+      width: 95%;
+    }
   }
+
   .task__name {
-    font-size: 7vw;
+    font-size: 1.2em;
+    line-height: 1em;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+    text-align: center;
   }
 
   .task__discription {
     margin: 0 auto;
-    width: 70vw;
-    font-size: 5vw;
-    line-height: 6vw;
-    text-align: left;
-    padding-bottom: 10px;
-  }
-  h4.task__name {
-    padding-bottom: 4px;
+    width: 80vw;
+    height: 12em;
+    font-size: 0.8em;
+    line-height: 1.2em;
+    letter-spacing: 0.04em;
   }
   .openTask {
-    font-size: 20px;
+    font-size: 0.7rem;
+  }
+  .addTask {
+    padding: 10px 0 10px 0;
+    &-btn {
+      font-size: 0.7rem;
+    }
   }
 }

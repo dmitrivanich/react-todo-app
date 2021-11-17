@@ -8,7 +8,6 @@ function AddTaskForm({ folder, index, addTaskOnFolders, closeAddTaskForm }) {
   const [disk, setDisk] = useState('')
   const [time, setTime] = useState('')
 
-
   const onAddTask = () => {
     if (disk.length > 1000000 || name.length > 55) {
       return
@@ -43,15 +42,17 @@ function AddTaskForm({ folder, index, addTaskOnFolders, closeAddTaskForm }) {
           onChange={e => { setName(e.target.value) }}
         />
 
+
         <input
-          name="Время на выполнение"
           className="time"
           type="time"
           step="2"
           value={time}
-          placeholder="fff"
           onChange={e => { setTime(e.target.value) }}
         />
+
+
+
 
         <p className="formInfo">{disk.length > 100000 && `Maximum number of characters! (${disk.length} of 100000)`}</p>
 
@@ -61,7 +62,8 @@ function AddTaskForm({ folder, index, addTaskOnFolders, closeAddTaskForm }) {
           required
           value={disk}
           placeholder="Enter task discription..."
-          onChange={e => { setDisk(e.target.value) }}
+          onChange={e => { setDisk(e.target.value.replace(/^ |(?<= ) /g, '\u00A0')) }}
+
         />
 
 

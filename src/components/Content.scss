@@ -16,7 +16,7 @@ $pad: 1vh; //отступ от краёв экрана
     display: flex;
     flex-wrap: wrap;
     overflow-y: auto;
-
+    overflow-x: hidden;
     // grid-gap: 10px;
     // grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
@@ -26,7 +26,7 @@ $pad: 1vh; //отступ от краёв экрана
   background-color: rgb(243, 243, 243);
   padding: 10px;
   padding-top: 20px;
-  border-radius: 25px;
+  border-radius: 20px;
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.07);
   text-align: center;
   margin: 10px;
@@ -35,7 +35,6 @@ $pad: 1vh; //отступ от краёв экрана
   transition: all 0.3s ease-out;
 
   .closeFolder {
-    display: none;
     position: absolute;
     cursor: pointer;
     width: 30px;
@@ -44,8 +43,8 @@ $pad: 1vh; //отступ от краёв экрана
     right: -8px;
     color: rgb(156, 156, 156);
     background-color: rgb(243, 243, 243);
-    filter: opacity(0.7);
-    transition: all 0.2s ease;
+    filter: opacity(0);
+    transition: all 0.3s ease;
     border-radius: 20px;
     border: 2px solid rgb(240, 240, 240);
     &:hover {
@@ -60,7 +59,7 @@ $pad: 1vh; //отступ от краёв экрана
   &:hover {
     background-color: rgb(240, 240, 240);
     .closeFolder {
-      display: block;
+      filter: opacity(0.8);
     }
   }
   &__name {
@@ -68,11 +67,11 @@ $pad: 1vh; //отступ от краёв экрана
     background-color: rgb(247, 247, 247);
     text-align: center;
     margin-bottom: 10px;
-    width: 96%;
+    width: 94%;
     padding: 5px 6px 5px 6px;
     font-size: 50px;
     border: none;
-    border-radius: 30px;
+    border-radius: 20px;
     box-shadow: 0px 14px 20px rgba(0, 0, 0, 0.06);
     cursor: cell;
     position: relative;
@@ -89,26 +88,34 @@ $pad: 1vh; //отступ от краёв экрана
 }
 
 @media (max-width: 500px) {
-  .folder__name {
-    font-size: 9vw;
+  .foldersBox {
+    min-height: 100vh;
+    padding: 0;
   }
-  .task__name {
-    font-size: 7vw;
+  .folder__name {
+    font-size: 1.5em;
+    margin-bottom: 0px;
   }
 
-  .task__discription {
-    width: 70vw;
-    font-size: 5vw;
-    line-height: 6vw;
-    text-align: left;
-    padding-bottom: 10px;
+  .addTaskForm {
+    margin-top: 15px;
+    .addBtn {
+      font-size: 1em;
+      height: 1.7em;
+      svg {
+        height: 0.6em;
+        width: 0.6em;
+      }
+    }
+    .time {
+      height: 1em;
+      font-size: 1em;
+    }
   }
+
   ul.task.li {
     padding: 5px 0;
     margin: 10px;
-  }
-  h4.task__name {
-    padding-bottom: 4px;
   }
 }
 
@@ -120,11 +127,11 @@ $pad: 1vh; //отступ от краёв экрана
       flex-wrap: wrap;
       overflow-y: auto;
       overflow-x: hidden;
-      grid-gap: 20px;
+      grid-gap: 5px;
     }
   }
   .folder {
-    max-width: 550px;
+    max-width: 560px;
     margin: 10px auto;
   }
 }

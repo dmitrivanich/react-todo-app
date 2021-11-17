@@ -22,9 +22,24 @@ function Tasks({
   useEffect(() => {
     let interval = setInterval(() => {
       setTimes(folder.tasks.map(t => {
-        return minusTime(userTaskTime(t.postTime, t.time), nowTime)
+
+        return toNormalTime(
+          Number(t.postDay) === new Date().getDate()
+
+            ? (toSecond(t.postTime) + toSecond(t.time)) - toSecond(nowTime)
+
+            : Number(t.postDay) === new Date().getDate() - 1
+
+              ? (toSecond(t.postTime) + toSecond(t.time) - toSecond("24:00:00")) - toSecond(nowTime)
+
+              : ("00:00:00")
+        )
       }))
     }, 1000)
+    // console.log(folder.tasks[0].postTime, toSecond(folder.tasks[0].postTime))
+    // console.log(folder.tasks[0].time, toSecond(folder.tasks[0].time))
+    // console.log(nowTime, toSecond(nowTime))
+    //console.log()
     return () => clearInterval(interval)
   })
 
@@ -36,7 +51,6 @@ function Tasks({
   const openTask = (ind) => {
     if (openTask !== null && openedTask[0] === folder.id && openedTask[1] === ind) { setOpenedTask([null, null]) }
     else { setOpenedTask([folder.id, ind]) }
-    console.log(folder.tasks[ind].discription.split('').length)
   }
 
   const toSecond = (time) => {
@@ -44,10 +58,10 @@ function Tasks({
       return 0
     }
     if (time !== undefined) {
-      var converting = time.split(':').map((element, index) => index === 0 ? Number(element) * 3600 : index === 1 ? Number(element) * 60 : Number(element))
+      var converting = time.split(':').map((element, index) =>
+        index === 0 ? Number(element) * 3600 : index === 1 ? Number(element) * 60 : Number(element))
 
       var result = null
-
       converting.map(el => result += el)
       return result
     }
@@ -57,7 +71,6 @@ function Tasks({
     if (sec <= 0) {
       return (`00:00:00`)
     }
-    // console.log(sec)
     var hours = (sec - (sec % 3600)) / 3600
     var minutes = (sec - (sec % 60)) / 60
     var seconds = sec % 60
@@ -71,16 +84,7 @@ function Tasks({
     if (minutes > 59) {
       minutes = minutes % 60
     }
-
-    return (`${hours}:${minutes}:${seconds}`)
-  }
-
-  const userTaskTime = (time1, time2) => {
-    return toNormalTime(toSecond(time1) + toSecond(time2))
-  }
-
-  const minusTime = (time1, time2) => {
-    return toNormalTime(toSecond(time1) - toSecond(time2))
+    return (`${String(hours).length < 2 ? "0" : ""}${hours}:${String(minutes).length < 2 ? "0" : ""}${minutes}:${String(seconds).length < 2 ? "0" : ""}${seconds}`)
   }
 
   const removeTask = (folderID, taskIndex) => {
@@ -147,7 +151,7 @@ function Tasks({
               folderId={folder.id}
               taskIndex={index}
               taskName={task.name}
-              taskTime={task.time}
+              taskTime={times[index]}
               taskDiscription={task.discription}
               confirmChanges={confirmChanges}
             />
@@ -156,9 +160,9 @@ function Tasks({
           {editableTask[1] !== index &&
             <h4 className="task__name">{task.name} {task.time &&
               <p className="time">
-                {toSecond(times[index]) > 0 ?
-                  task.completed ? "completed" : times[index] :
-                  task.completed ? "completed" : "is over"}
+                {toSecond(times[index]) > 0
+                  ? task.completed ? "completed" : times[index]
+                  : task.completed ? "completed" : "is over"}
               </p>}
             </h4>}
 
@@ -167,16 +171,25 @@ function Tasks({
           {editableTask[1] !== index &&
             <p className="task__discription"
               style={{
-                height: openedTask && openedTask[0] === folder.id && openedTask[1] === index ? "auto" : "10vh"
+                // 
+                height: openedTask &&
+                  openedTask[0] === folder.id && openedTask[1] === index &&
+                  task.discription.match(/$/gm).length > 10 ? "" : "auto"
               }}
-              onClick={() => console.log(folder.id, index)}
+              onClick={() => console.log({
+                time: task.time,
+                leftTime: times[index],
+                userTimer: task.postTime,
+                postDay: task.postDay
+              }
+              )}
             >{task.discription}
             </p>}
 
-          {editableTask[1] !== index && task.discription.length > 80 &&
+          {editableTask[1] !== index && task.discription.match(/$/gm).length > 12 &&
             <button className="openTask"
               onClick={() => openTask(index)}
-            >{openedTask && openedTask[0] === folder.id && openedTask[1] === index ? "↑ hide ↑" : "↓ show more ↓"}
+            >{openedTask && openedTask[0] === folder.id && openedTask[1] === index ? "↓ show more ↓" : "↑ hide ↑"}
             </button>}
 
         </li>

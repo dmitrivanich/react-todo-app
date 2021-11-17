@@ -54,12 +54,15 @@ function AddTaskForm({
         <p className="formInfo">{disk.length > 100000 && `Maximum number of characters! (${disk.length} of 100000)`}</p>
 
         <textarea className="disk"
+          pattern=".*\S+.*"
           type="text"
           rows="5"
           required
           value={disk}
           placeholder="Enter task discription..."
-          onChange={e => { setDisk(e.target.value) }}
+          onChange={e => {
+            setDisk(e.target.value.replace(/^ |(?<= ) /g, '\u00A0'))
+          }}
         />
 
 

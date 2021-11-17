@@ -85,7 +85,7 @@ function App() {
     setFolders(newFolders)
   }
 
-  const addTaskOnFolders = (name, time, disk, index, id) => {
+  const addTaskOnFolders = (name, leftTime, disk, index, id,) => {
     var newFolders = [...folders]
     var folder = folders[index]
     var newTasks = folder.tasks
@@ -94,7 +94,8 @@ function App() {
       newTasks.push({
         "name": name,
         "postTime": `${new Date().getHours().toString()}:${new Date().getMinutes().toString()}:${new Date().getSeconds().toString()}`,
-        "time": time,
+        "postDay": `${new Date().getDate().toString()}`,
+        "time": leftTime,
         "discription": disk,
         "completed": false
       })
@@ -125,6 +126,7 @@ function App() {
       discription: disk,
       name: name,
       postTime: `${new Date().getHours().toString()}:${new Date().getMinutes().toString()}:${new Date().getSeconds().toString()}`,
+      postDay: newTasks[taskIndex].postDay,
       time: time
     }
 

@@ -61,6 +61,9 @@
     .time {
       color: rgb(197, 197, 197);
       height: 40px;
+      &::-webkit-calendar-picker-indicator {
+        display: none;
+      }
     }
 
     .disk {
