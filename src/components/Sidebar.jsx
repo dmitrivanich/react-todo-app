@@ -19,7 +19,7 @@ function Sidebar({ addNewFolder, folders, whenRemove, whenFolderIconClick }) {
 
 
   return (
-    <div className="nav" style={sidebarView ? { bottom: "0px", padding: "0px" } : { display: "block" }} >
+    <div className="nav" style={sidebarView ? { bottom: "0px", padding: "0px" } : {}} >
       <div className="nav__sidebar">
 
         <ul className="nav__menu" onClick={() => menu()}>

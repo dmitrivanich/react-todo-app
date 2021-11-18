@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { IoIosClose } from 'react-icons/io';
 import { BiCheck } from 'react-icons/bi';
 import { FiEdit3 } from 'react-icons/fi';
-import EditTaskForm from './EditTaskForm'
-// import Timer from './Timer'
-import './Tasks.scss'
+import EditTaskForm from './EditTaskForm';
+import './Tasks.scss';
 
 function Tasks({
   folder,
@@ -16,7 +15,7 @@ function Tasks({
   const date = new Date()
   const nowTime = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
   const [times, setTimes] = useState('00:00:01')
-  const [openedTask, setOpenedTask] = useState([null, null])
+  const [openedTask, setOpenedTask] = useState([null, folder.tasks.map(() => false)])
   const [editableTask, setEditableTask] = useState([null, null])
 
   useEffect(() => {
@@ -36,6 +35,7 @@ function Tasks({
         )
       }))
     }, 1000)
+
     // console.log(folder.tasks[0].postTime, toSecond(folder.tasks[0].postTime))
     // console.log(folder.tasks[0].time, toSecond(folder.tasks[0].time))
     // console.log(nowTime, toSecond(nowTime))
@@ -49,9 +49,12 @@ function Tasks({
 
 
   const openTask = (ind) => {
-    if (openTask !== null && openedTask[0] === folder.id && openedTask[1] === ind) { setOpenedTask([null, null]) }
-    else { setOpenedTask([folder.id, ind]) }
-    console.log(openedTask)
+
+    var UpdatedTasks = openedTask[1].map((task, index) =>
+      index === ind ? !task : task
+    )
+
+    setOpenedTask([folder.id, [...UpdatedTasks]])
   }
 
   const toSecond = (time) => {
@@ -111,6 +114,7 @@ function Tasks({
     // console.log([id, index, name, disk, time])
     setEditableTask([null, null])
   }
+
 
 
   return (
@@ -175,10 +179,11 @@ function Tasks({
                 // 
                 height: openedTask &&
                   task.discription.match(/$/gm).length > 10
-                  ? openedTask[0] === folder.id && openedTask[1] === index
+                  ? openedTask[0] === folder.id && openedTask[1][index] === true
                     ? "auto"
                     : ""
                   : "auto"
+                  && "auto"
               }}
               onClick={() => console.log({
                 time: task.time,
@@ -190,10 +195,11 @@ function Tasks({
             >{task.discription}
             </p>}
 
-          {editableTask[1] !== index && task.discription.match(/$/gm).length > 12 &&
+          {editableTask[1] !== index && task.discription.match(/$/gm).length > 10 &&
             <button className="openTask"
               onClick={() => openTask(index)}
-            >{openedTask && openedTask[0] === folder.id && openedTask[1] === index ? "↑ hide ↑" : "↓ show more ↓"}
+            >
+              {openedTask && openedTask[0] === folder.id && openedTask[1][index] === true ? "↑ hide ↑" : "↓ show more ↓"}
             </button>}
         </li>
       ))

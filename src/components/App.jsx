@@ -3,11 +3,12 @@ import Sidebar from './Sidebar.jsx'
 import Content from './Content.jsx'
 import './App.scss';
 import axios from 'axios';
-
+import { BsFillSunFill, BsFillCloudSunFill, BsFillCloudFill } from 'react-icons/bs';
 
 function App() {
 
   const [folders, setFolders] = useState(null)
+  const [light, setLight] = useState(1)
 
   useEffect(() => {
     axios.get('http://localhost:3001/folders').then(({ data }) => {
@@ -160,7 +161,23 @@ function App() {
 
   return (
 
-    <div className="all">
+    <div
+      className="all"
+    >
+      <button
+        className="light"
+        onClick={() => {
+          light === 1 && setLight(2)
+          light === 2 && setLight(3)
+          light === 3 && setLight(1)
+        }}
+      >
+        {light === 1 && <BsFillCloudSunFill />}
+        {light === 2 && <BsFillCloudFill />}
+        {light === 3 && <BsFillSunFill />}
+      </button>
+
+
       <Sidebar
         addNewFolder={addNewFolder}
         folders={folders}
