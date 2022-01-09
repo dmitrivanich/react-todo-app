@@ -49,9 +49,8 @@ function Tasks({
 
 
   const openTask = (ind) => {
-    var UpdatedTasks = openedTask[1].map((task, index) =>
-      index === ind ? !task : task
-    )
+    console.log(openedTask)
+    var UpdatedTasks = openedTask[1].map((task, index) => index === ind ? !task : task)
 
     setOpenedTask([folder.id, [...UpdatedTasks]])
   }
