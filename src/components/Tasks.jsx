@@ -49,7 +49,6 @@ function Tasks({
 
 
   const openTask = (ind) => {
-
     var UpdatedTasks = openedTask[1].map((task, index) =>
       index === ind ? !task : task
     )
@@ -195,7 +194,7 @@ function Tasks({
             >{task.discription}
             </p>}
 
-          {editableTask[1] !== index && task.discription.match(/$/gm).length > 10 &&
+          {(editableTask[1] !== index) && (task.discription.match(/$/gm).length) > 10 &&
             <button className="openTask"
               onClick={() => openTask(index)}
             >
