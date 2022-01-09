@@ -3,12 +3,11 @@ import Sidebar from './Sidebar.jsx'
 import Content from './Content.jsx'
 import './App.scss';
 import axios from 'axios';
-import { BsFillSunFill, BsFillCloudSunFill, BsFillCloudFill } from 'react-icons/bs';
+
 
 function App() {
 
   const [folders, setFolders] = useState(null)
-  const [light, setLight] = useState(1)
 
   useEffect(() => {
     axios.get('http://localhost:3001/folders').then(({ data }) => {
@@ -17,19 +16,19 @@ function App() {
 
   }, [])
 
-  const addNewFolder = (newFolder) => {
+  const whenCreateFolder = (newFolder) => {
     axios.post('http://localhost:3001/folders', { ...newFolder }).then(({ data }) => {
       setFolders([...folders, data])
     })
   }
 
-  const whenRemove = (index) => {
+  const whenRemoveFolder = (folderIndex) => {
     const newFolders = [...folders]
-    newFolders.splice(index, 1)
+    newFolders.splice(folderIndex, 1)
 
     setFolders([...newFolders])
 
-    axios.delete(`http://localhost:3001/folders/${folders[index].id}`)
+    axios.delete(`http://localhost:3001/folders/${folders[folderIndex].id}`)
   }
 
   const whenTaskRemove = (folderID, taskIndex) => {
@@ -71,11 +70,10 @@ function App() {
       folder.id !== folderID ? oldFolder : folder
     ))
 
-    console.log(newTask[0].completed)
     setFolders(newFolders)
 
     axios.patch(`http://localhost:3001/folders/${folderID}`, {
-      tasks: newTask
+      tasks: folder[0].tasks
     })
   }
 
@@ -86,12 +84,13 @@ function App() {
     setFolders(newFolders)
   }
 
-  const addTaskOnFolders = (name, leftTime, disk, index, id,) => {
+  const addTaskOnFolder = (name, leftTime, disk, index, id,) => {
     var newFolders = [...folders]
     var folder = folders[index]
     var newTasks = folder.tasks
 
     if (name && disk) {
+
       newTasks.push({
         "name": name,
         "postTime": `${new Date().getHours().toString()}:${new Date().getMinutes().toString()}:${new Date().getSeconds().toString()}`,
@@ -114,7 +113,6 @@ function App() {
   }
 
   const whenTaskEdit = (folderId, taskIndex, name, disk, time) => {
-    // console.log([folderId, taskIndex, name, time, disk])
 
     var newFolders = [...folders]
     var folder = folders.map(folder => folder.id === folderId)
@@ -133,11 +131,6 @@ function App() {
 
     newTasks.splice(taskIndex, 1, newTask)
     newFolders[folderIndex].tasks = newTasks
-
-
-    // console.log(newTask)
-    // console.log(newTasks)
-    // console.log(newFolders)
 
     setFolders(newFolders)
 
@@ -158,37 +151,22 @@ function App() {
   }
 
 
-
   return (
 
     <div
       className="all"
     >
-      <button
-        className="light"
-        onClick={() => {
-          light === 1 && setLight(2)
-          light === 2 && setLight(3)
-          light === 3 && setLight(1)
-        }}
-      >
-        {light === 1 && <BsFillCloudSunFill />}
-        {light === 2 && <BsFillCloudFill />}
-        {light === 3 && <BsFillSunFill />}
-      </button>
-
-
       <Sidebar
-        addNewFolder={addNewFolder}
+        addNewFolder={whenCreateFolder}
         folders={folders}
-        whenRemove={whenRemove}
+        whenRemove={whenRemoveFolder}
         whenFolderIconClick={whenFolderIconClick}
       />
 
       <Content
         folders={folders}
-        addTaskOnFolders={addTaskOnFolders}
-        whenRemoveFolder={whenRemove}
+        addTaskOnFolder={addTaskOnFolder}
+        whenRemoveFolder={whenRemoveFolder}
         whenChangeFolderName={whenChangeFolderName}
         whenTaskRemove={whenTaskRemove}
         whenTaskComplete={whenTaskComplete}

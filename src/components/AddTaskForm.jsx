@@ -3,7 +3,7 @@ import './AddTaskForm.scss'
 import { IoIosClose } from 'react-icons/io';
 import { BiMessageAltAdd } from 'react-icons/bi';
 
-function AddTaskForm({ folder, index, addTaskOnFolders, closeAddTaskForm }) {
+function AddTaskForm({ folder, index, addTaskOnFolder, closeAddTaskForm }) {
   const [name, setName] = useState('')
   const [disk, setDisk] = useState('')
   const [time, setTime] = useState('')
@@ -13,7 +13,7 @@ function AddTaskForm({ folder, index, addTaskOnFolders, closeAddTaskForm }) {
       return
     }
 
-    addTaskOnFolders(name, time, disk, index, folder.id)
+    addTaskOnFolder(name, time, disk, index, folder.id)
     setName('')
     setDisk('')
   }

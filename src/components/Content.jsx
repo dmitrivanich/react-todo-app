@@ -9,7 +9,7 @@ import { IoIosClose } from 'react-icons/io';
 
 const Content = ({
   folders,
-  addTaskOnFolders,
+  addTaskOnFolder,
   whenRemoveFolder,
   whenChangeFolderName,
   whenTaskRemove,
@@ -105,7 +105,7 @@ const Content = ({
                 <AddTaskForm
                   folder={folder}
                   index={index}
-                  addTaskOnFolders={addTaskOnFolders}
+                  addTaskOnFolder={addTaskOnFolder}
                   closeAddTaskForm={closeAddTaskForm}
                 />
               }
